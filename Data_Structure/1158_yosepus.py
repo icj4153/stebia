@@ -14,12 +14,6 @@ while(len(in_queue) != 0):
         in_queue.append(in_queue.popleft())
     result.append(in_queue.popleft())
 
-
-print("<",end="")
-for i in range(n):
-    if i == n-1:
-        print(result.popleft(),end="")
-    else:
-        print(result.popleft(),end=", ")
-
-print(">",end="")
+print("<", end="")
+print(*result, sep=", ", end="")
+print(">", end="")
