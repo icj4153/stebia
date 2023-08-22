@@ -1,29 +1,25 @@
 import sys
+input= sys.stdin.readline
 
+def binary_search(arr, start, end):
+    res = 0
+    while start <= end:
+        mid = (start+end) // 2
+        total = 0
+        
+        for x in arr:
+            if x > mid:
+                total+= x- mid
+            
+        if total < m:
+            end = mid-1
+        else:
+            res = mid
+            start = mid +1
+    return res
+        
+n , m = map(int,input().split())
+li = list(map(int,input().split()))
 
-def input():
-    return sys.stdin.readline().rstrip()
-
-
-N, M = map(int, input().split())
-arr = list(map(int, input().split()))
-
-lo = 0
-hi = int(1e9)+1
-answer = 0
-
-while lo <= hi:
-    mid = (lo + hi) // 2
-    sum = 0
-
-    for tree in arr:
-        if tree > mid:
-            sum += tree - mid
-
-    if sum >= M:
-        lo = mid + 1
-        answer = mid
-    else:
-        hi = mid - 1
-
-print(answer)
+r = binary_search(li, 0, max(li))
+print(r)
