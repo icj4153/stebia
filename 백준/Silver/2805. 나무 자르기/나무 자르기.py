@@ -9,7 +9,7 @@ N, M = map(int, input().split())
 arr = list(map(int, input().split()))
 
 lo = 0
-hi = max(arr)
+hi = int(1e9)+1
 answer = 0
 
 while lo <= hi:
