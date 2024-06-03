@@ -1,10 +1,9 @@
 # 풀이 아이디어
 # 1. 배열을 오름차순으로 정렬한다.
-# 2. 배열에 아무것도 안남을 때까지 반복한다.
-# 3. 만약 원소가 하나 남았다면 사람을 배에 바로 태우고 answer 1개 증가
-# 4. 낮은 몸무게 부터 순회를 돌며 배열의 가장 큰 값부터 내려오면서 더해서 limit 이하 라면 
+# 2. 무게가 가장 낮은 사람을 start 많은 사람을 end로 설정 후 반복문을 수행한다. 
+# 3. 낮은 몸무게 부터 순회를 돌며 배열의 가장 큰 값부터 내려오면서 더해서 limit 이하 라면 
 #   두 원소를 제거 후 answer을 1증가 시킨다.
-# 5. 만약 모두 limit을 초과한다면 answer에 현재 사람의 수를 더해준다.
+# 4. 만약 모두 limit을 초과한다면 가장 무거운 사람이 탈출 후 answer에 현재 사람의 수를 더해준다.
 
 
 # limit 120
@@ -18,11 +17,13 @@ def solution(people, limit):
     start = 0
     end = len(people) - 1
     
+    # 3
     while(start<=end):
         if(people[start]+people[end] <= limit):
             start += 1
             end -= 1
             answer += 1
+        # 4
         else:
             end -= 1
             answer += 1
