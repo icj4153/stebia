@@ -5,40 +5,19 @@
 # 4. 
 
 from collections import deque
+
 def solution(priorities, location):
-    answer = 1
-    q = deque(priorities)
-    idx = location
-    while len(q)>1:
-        tmp = q.popleft()
-        if tmp<max(q):
-            q.append(tmp)
-            if idx == 0:
-                idx=len(q)-1
-            else:
-                idx-=1
+    # 큐 초기화, (인덱스, 우선순위) 튜플을 담음
+    queue = deque((i, p) for i, p in enumerate(priorities))
+    answer = 0
+    
+    while queue:
+        cur = queue.popleft()  # 큐에서 첫 번째 요소를 꺼냄
+        # 큐에 남아 있는 요소들 중 우선순위가 현재 요소보다 높은 것이 있는지 확인
+        if any(cur[1] < q[1] for q in queue):
+            queue.append(cur)  # 우선순위가 더 높은 요소가 있으면 현재 요소를 다시 큐에 추가
         else:
-            if idx == 0:
-                return answer
-            else:
-                answer += 1
-                idx -= 1
-    return answer
+            answer += 1  # 현재 요소를 실행
+            if cur[0] == location:  # 현재 요소가 찾고자 하는 위치의 요소라면
+                return answer  # 실행 순서를 반환
 
-
-# 1 2 3 2
-# 2 3 2 1
-# 3 2 1 2
-# 2 1 2
-# 1 2
-# 2 1
-# 1
-# 0
-
-# 0 1 2 3
-# 1 2 3 0
-# 2 3 0 1
-# 3 0 1
-# 0 1
-# 1 0
-# 0
